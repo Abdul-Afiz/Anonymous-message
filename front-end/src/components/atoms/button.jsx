@@ -6,12 +6,12 @@ const Button = ({ onClick, title, type, cl }) => {
     <button
       type={type}
       className={classnames(
-        "bg-[#280484] text-center text-white text-[0.9rem] text-sm font-medium p-[0.8rem] rounded-sm cursor-pointer",
+        "bg-gradient-to-r from-[#421FAB] via-[#3F15BD] to-[#3710AD] text-center text-white text-[0.9rem] text-sm font-medium p-[0.8rem] rounded-sm cursor-pointer w-[100%]",
         cl
       )}
       onClick={onClick}
     >
-      {title}
+      <span className="font-semibold text-base">{title}</span>
     </button>
   );
 };

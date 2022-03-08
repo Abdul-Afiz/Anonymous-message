@@ -14,7 +14,7 @@ const Input = ({ value, onChange, name, label, placeholder, password, cl }) => {
         className={`border-[1.8px] rounded-sm border-[#997fda] w-full py-[0.5rem] px-4`}
       >
         <input
-          className="w-full text-sm outline-none"
+          className="w-full text-sm outline-none placeholder:text-[#61577995]"
           value={value}
           onChange={onChange}
           placeholder={placeholder}

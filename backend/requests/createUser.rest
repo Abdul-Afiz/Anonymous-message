@@ -1,5 +1,5 @@
 GET http://localhost:4000/api/users/messages
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjVjZDUxN2FkODEyNzMyN2FhY2Q4YiIsImVtYWlsIjoiYWZlZXpAZ21haWwuY29tIiwibmFtZSI6ImFmZWV6IiwiaWF0IjoxNjQ2NjQ0NTk4LCJleHAiOjE2NDY2NDgxOTh9.Fj98L1GoTdLLSsl_VDPhAObpW8T02UzY-SUd9os5J2s
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjVjZDUxN2FkODEyNzMyN2FhY2Q4YiIsImVtYWlsIjoiYWZlZXpAZ21haWwuY29tIiwibmFtZSI6ImFmZWV6IiwiaWF0IjoxNjQ2NzI5Mjg4LCJleHAiOjE2NDY3MzI4ODh9.Dh5ytIWL181jKj8fVNlFbGD5hJvqM-KJyVQxLgWyEHk
 
 
 ###
@@ -8,7 +8,7 @@ POST http://localhost:4000/api/users/messages/6225cd517ad8127327aacd8b
 Content-Type: application/json
 
 {
-    "message": "u are a good boy"
+    "message": "hello world"
 }
 
 ###

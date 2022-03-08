@@ -16,12 +16,15 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-16 overflow-hidden">
-      <h1 className="text-4xl font-bold mb-1">Sign Up</h1>
-      <p className="text-[#5b5675] font-normal text-[0.9rem] mt-[1rem] text-center max-w-[80%]">
-        "Send that secret message to that person you have always wanted to."
-      </p>
-      <form className="flex flex-col w-full mt-3" onSubmit={handleSubmit}>
+    <div className="flex flex-col items-center p-8 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 overflow-hidden">
+      <form
+        className="flex flex-col w-full mt-3 mx-auto max-w-[40%] bg-white p-6 items-center rounded-sm"
+        onSubmit={handleSubmit}
+      >
+        <h1 className="text-4xl font-bold ">Sign Up</h1>
+        <p className="text-[#5b5675] font-normal text-[0.9rem] mt-[1rem] text-center max-w-[80%]">
+          "Send that secret message to that person you have always wanted to."
+        </p>
         <Input
           placeholder="Enter your name"
           label="Name"

@@ -13,12 +13,15 @@ const LogIn = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-16 ">
-      <h1 className="text-4xl font-bold mb-2">Log in</h1>
-      <p className="text-[#5b5675] font-normal text-[0.9rem] my-2 text-center max-w-[80%]">
-        "Send that secret message to that person you have always wanted to."
-      </p>
-      <form className="flex flex-col w-full mt-3" onSubmit={handleSubmit}>
+    <div className="flex flex-col items-center p-16 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+      <form
+        className="flex flex-col w-full mt-3 mx-auto max-w-[40%] bg-white p-6 items-center rounded-sm"
+        onSubmit={handleSubmit}
+      >
+        <h1 className="text-4xl font-bold mb-2">Log in</h1>
+        <p className="text-[#5b5675] font-normal text-[0.9rem] my-2 text-center max-w-[80%]">
+          "Send that secret message to that person you have always wanted to."
+        </p>
         <Input
           placeholder="Enter your email"
           label="Email"
@@ -31,7 +34,7 @@ const LogIn = () => {
           name="password"
           password="password"
         />
-        <Button title="Log in" cl="mt-[1.5rem]" type="submit" />
+        <Button title="Log in" cl="mt-[1.5rem] " type="submit" />
 
         <p className="mt-[0.7rem] text-sm ">
           Not registered yet?{" "}

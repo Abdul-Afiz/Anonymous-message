@@ -50,15 +50,11 @@ userRouter.post("/login/", async (req, res) => {
 userRouter.get("/messages/", async (req, res) => {
   const decodedToken = jwt.verify(req.token, process.env.Secret);
 
-  // console.log({ decodedToken });
-
   if (!decodedToken) {
     return res.status(401).json({ error: "invalid or missing token" });
   }
 
   const user = await User.findById(decodedToken.id);
-
-  console.log({ user });
 
   const messages = await user.messages;
   res.json(messages);
@@ -68,8 +64,6 @@ userRouter.get("/messages/", async (req, res) => {
 
 userRouter.post("/messages/:id", async (req, res) => {
   const id = req.params.id;
-
-  console.log({ id });
 
   const user = await User.findById(id);
 
