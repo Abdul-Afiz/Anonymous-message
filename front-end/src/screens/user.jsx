@@ -1,29 +1,50 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "../components/atoms/button";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { reSignIn, signOut } from "../reducers/anonReducer";
+import { getMessage } from "../reducers/messageReducer";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const User = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(reSignIn());
+    dispatch(getMessage());
+  }, []);
+
+  const logout = () => {
+    dispatch(signOut());
+    navigate("/");
+  };
+
   return (
-    <div className="flex flex-col justify-center items-center p-8 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-      <div className="flex flex-col w-full mt-3 mx-auto max-w-[40%] bg-white p-6 items-center rounded-sm">
-        <h1 className="text-4xl font-bold text-center">Aweda's Profile</h1>
+    <div className="flex flex-col">
+      <div className="flex flex-col w-full bg-white p-6 items-center rounded-sm">
+        <h1 className="text-4xl font-bold text-center">
+          {user.name ? `${user.name}'s Profile` : "Welcome"}
+        </h1>
         <p className="text-[#5b5675] font-normal text-[0.9rem] mt-[1rem] text-center max-w-[80%]">
-          "Welcome Aweda Check Your Messages."
+          {user.name
+            ? `Welcome ${user.name} Check Your Messages.`
+            : "Welcome to Anonymous Message, share your link to start getting your messages"}
         </p>
 
         <Button
           title="View Your Secret Messages"
           cl="mt-[1.5rem]"
           type="submit"
+          onClick={() => navigate("/messages")}
         />
 
-        <Button title="Share my link" cl="mt-[1.5rem]" type="submit" />
+        <CopyToClipboard text={`http://localhost:3000/message/${user.id}`}>
+          <Button title="Share my link" cl="my-[1.5rem]" type="submit" />
+        </CopyToClipboard>
 
-        {/* <p className="mt-[0.7rem] text-sm">
-          Already have an account?{" "}
-          <span className="text-[#280484] font-medium text-base cursor-pointer">
-            Sign in
-          </span>
-        </p> */}
+        {user && <Button title="Log Out" onClick={logout} />}
       </div>
     </div>
   );

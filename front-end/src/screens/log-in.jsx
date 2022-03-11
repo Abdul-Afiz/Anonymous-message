@@ -1,25 +1,32 @@
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../components/atoms/button";
 import Input from "../components/atoms/input";
+import { getUser, signIn } from "../reducers/anonReducer";
+import { useNavigate } from "react-router-dom";
 
 const LogIn = () => {
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     e.target.email.value = "";
     const password = e.target.password.value;
     e.target.password.value = "";
-
-    console.log(email, password);
+    const newUser = { email, password };
+    dispatch(signIn(newUser));
   };
 
   return (
-    <div className="flex flex-col items-center p-16 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+    <div className="flex flex-colp-16 overflow-hidden">
       <form
-        className="flex flex-col w-full mt-3 mx-auto max-w-[40%] bg-white p-6 items-center rounded-sm"
+        className="flex flex-col bg-white p-6 items-center rounded-sm"
         onSubmit={handleSubmit}
       >
         <h1 className="text-4xl font-bold mb-2">Log in</h1>
-        <p className="text-[#5b5675] font-normal text-[0.9rem] my-2 text-center max-w-[80%]">
+        <p className="text-[#5b5675] font-normal text-[0.9rem] my-2 text-center max-w-[70%]">
           "Send that secret message to that person you have always wanted to."
         </p>
         <Input
@@ -38,7 +45,10 @@ const LogIn = () => {
 
         <p className="mt-[0.7rem] text-sm ">
           Not registered yet?{" "}
-          <span className="text-[#280484] font-medium text-base cursor-pointer">
+          <span
+            className="text-[#280484] font-medium text-base cursor-pointer"
+            onClick={() => navigate("/signup")}
+          >
             Create an Account
           </span>
         </p>

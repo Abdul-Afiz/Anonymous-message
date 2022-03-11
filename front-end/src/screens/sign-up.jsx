@@ -1,9 +1,13 @@
 import React from "react";
 import Input from "../components/atoms/input";
 import Button from "../components/atoms/button";
+import userServices from "../services/user-services";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const name = e.target.name.value;
     e.target.name.value = "";
@@ -12,13 +16,20 @@ const SignUp = () => {
     const password = e.target.password.value;
     e.target.password.value = "";
 
-    console.log(name, email, password);
+    const user = { name, email, password };
+
+    try {
+      const signup = await userServices.userSignup(user);
+      console.log(signup);
+    } catch (error) {
+      console.log(error.response.data.error);
+    }
   };
 
   return (
-    <div className="flex flex-col items-center p-8 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 overflow-hidden">
+    <div className="overflow-hidden">
       <form
-        className="flex flex-col w-full mt-3 mx-auto max-w-[40%] bg-white p-6 items-center rounded-sm"
+        className="flex flex-col mt-3 bg-white p-6 items-center rounded-sm"
         onSubmit={handleSubmit}
       >
         <h1 className="text-4xl font-bold ">Sign Up</h1>
@@ -47,7 +58,10 @@ const SignUp = () => {
 
         <p className="mt-[0.7rem] text-sm">
           Already have an account?{" "}
-          <span className="text-[#280484] font-medium text-base cursor-pointer">
+          <span
+            className="text-[#280484] font-medium text-base cursor-pointer"
+            onClick={() => navigate("/")}
+          >
             Sign in
           </span>
         </p>

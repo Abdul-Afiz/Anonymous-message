@@ -3,7 +3,7 @@ const validator = require("mongoose-unique-validator");
 
 const messageSchema = new mongoose.Schema(
   {
-    message: { type: String, trim: true },
+    message: { type: String, trim: true, required: true },
   },
   {
     timestamps: { createdAt: true, updatedAt: false },

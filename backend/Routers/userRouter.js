@@ -6,6 +6,11 @@ const Message = require("../models/messageModel");
 
 userRouter.post("/signup/", async (req, res) => {
   const body = req.body;
+
+  if (!body.password) {
+    return res.status(400).json({ error: "password is required" });
+  }
+
   const passwordHash = await bcrypt.hash(body.password, 10);
   const user = new User({
     email: body.email,
@@ -23,14 +28,10 @@ userRouter.post("/login/", async (req, res) => {
   const body = req.body;
   const user = await User.findOne({ email: body.email });
 
-  console.log({ user });
-
   const password =
     user === null
       ? false
       : await bcrypt.compare(body.password, user.passwordHash);
-
-  console.log({ password });
 
   if (!(user && password)) {
     return res.status(401).json({ error: "invalid username or password" });
@@ -45,7 +46,20 @@ userRouter.post("/login/", async (req, res) => {
   res.status(201).send({ id: user._id, token });
 });
 
-///////////////
+////////////////////////////////
+
+userRouter.get("/", async (req, res) => {
+  const decodedToken = jwt.verify(req.token, process.env.Secret);
+
+  if (!decodedToken) {
+    return res.status(401).json({ error: "invalid or missing token" });
+  }
+
+  const user = await User.findById(decodedToken.id);
+  res.json(user);
+});
+
+////////////////////////////////
 
 userRouter.get("/messages/", async (req, res) => {
   const decodedToken = jwt.verify(req.token, process.env.Secret);
@@ -54,13 +68,11 @@ userRouter.get("/messages/", async (req, res) => {
     return res.status(401).json({ error: "invalid or missing token" });
   }
 
-  const user = await User.findById(decodedToken.id);
-
-  const messages = await user.messages;
-  res.json(messages);
+  const msg = await User.findById(decodedToken.id);
+  res.json(msg);
 });
 
-////////////////////////////////
+//////////////////////////////
 
 userRouter.post("/messages/:id", async (req, res) => {
   const id = req.params.id;
@@ -68,12 +80,13 @@ userRouter.post("/messages/:id", async (req, res) => {
   const user = await User.findById(id);
 
   const message = new Message({ message: req.body.message });
-  console.log({ message });
+
   const savedMessage = await message.save();
-  console.log({ savedMessage });
+
   user.messages = await user.messages.concat(message);
   await user.save();
-  res.status(201).json(savedMessage);
+
+  res.status(201).send(savedMessage);
 });
 
 module.exports = userRouter;
