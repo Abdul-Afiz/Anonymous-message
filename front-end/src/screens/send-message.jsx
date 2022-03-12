@@ -4,17 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
 import Button from "../components/atoms/button";
-import { newMsg } from "../reducers/messageReducer";
+
+import { getMessage, newMsg } from "../reducers/messageReducer";
 
 const SendMessage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.auth.id);
+
+  const id = useSelector((state) => state.auth.id);
+  const user = useSelector((state) => state.message);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const message = e.target.message.value;
-    dispatch(newMsg(user, message));
+    dispatch(newMsg(id, message));
 
     e.target.message.value = "";
   };
@@ -24,9 +27,11 @@ const SendMessage = () => {
       className="flex flex-col w-full mt-3 p-6 mx-auto max-w-[40%] bg-white items-center rounded-md"
       onSubmit={handleSubmit}
     >
-      <h1 className="text-4xl font-bold text-center">Send A Secret Message</h1>
-      <p className="text-[#5b5675] font-normal text-[0.9rem] my-[1rem] text-center max-w-[80%]">
-        "Send that secret message to that person you have always wanted to."
+      <h1 className="text-3xl font-bold text-center">
+        Send A Secret Message to {user.name.toUpperCase()}
+      </h1>
+      <p className="text-[#5b5675] font-normal text-[0.9rem] my-[1rem] text-center italic">
+        "Drop an anonymous message for {user.name.toUpperCase()}."
       </p>
 
       <div

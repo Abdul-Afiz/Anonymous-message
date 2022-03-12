@@ -16,7 +16,7 @@ const Messages = () => {
   useEffect(() => {
     dispatch(reSignIn());
     dispatch(getMessage());
-  }, []);
+  }, [dispatch]);
 
   const logout = () => {
     dispatch(signOut());
@@ -25,7 +25,7 @@ const Messages = () => {
 
   return (
     <div className="overflow-hidden flex flex-1">
-      <div className="flex flex-col p-4 justify-center items-center">
+      <div className="flex flex-col p-4">
         <h2 className="text-4xl font-bold mt-2 text-center text-white">
           My Messages
         </h2>
@@ -34,11 +34,11 @@ const Messages = () => {
             {data.map((msg) => (
               <div
                 key={msg._id.toString()}
-                className="bg-gradient-to-r from-[#421FAB] via-[#725eaf] to-[#3710AD] p-4 m-5 rounded-xl grid place-items-center"
+                className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-4 m-5 rounded-xl grid place-items-center"
               >
-                <span className="font-bold text-white">Message</span>
-                <p className="my-2 text-center"> {msg.message} </p>
-                <span className="font-semibold text-[0.9rem] text-white">
+                <span className="font-bold text-lg text-white ">Message</span>
+                <p className="my-2 text-center italic"> {msg.message} </p>
+                <span className="font-semibold text-[0.8rem] text-white">
                   Sent on {msg.createdAt}
                 </span>
               </div>

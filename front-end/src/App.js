@@ -47,8 +47,10 @@ function App() {
         <Route
           path="/message/:id"
           element={
-            !user ? (
-              <h1 className="font-semibold text-3xl text-white">loading</h1>
+            !user || !msg ? (
+              <h1 className="font-semibold text-3xl text-white">
+                loading, please Reload
+              </h1>
             ) : (
               <SendMessage />
             )

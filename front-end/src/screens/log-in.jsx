@@ -1,7 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Button from "../components/atoms/button";
 import Input from "../components/atoms/input";
-import { getUser, signIn } from "../reducers/anonReducer";
+import { signIn } from "../reducers/anonReducer";
 import { useNavigate } from "react-router-dom";
 
 const LogIn = () => {
@@ -26,8 +26,9 @@ const LogIn = () => {
         onSubmit={handleSubmit}
       >
         <h1 className="text-4xl font-bold mb-2">Log in</h1>
-        <p className="text-[#5b5675] font-normal text-[0.9rem] my-2 text-center max-w-[70%]">
-          "Send that secret message to that person you have always wanted to."
+        <p className="text-[#5b5675] font-normal text-[0.9rem] my-2 text-center max-w-[70%] italic">
+          "Send secret messages to your friends and receive anonymous accolades
+          for fun at no charges."
         </p>
         <Input
           placeholder="Enter your email"

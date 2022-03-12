@@ -34,7 +34,8 @@ const SignUp = () => {
       >
         <h1 className="text-4xl font-bold ">Sign Up</h1>
         <p className="text-[#5b5675] font-normal text-[0.9rem] mt-[1rem] text-center max-w-[80%]">
-          "Send that secret message to that person you have always wanted to."
+          "Register Now! Send secret messages to your friends and receive
+          anonymous accolades at Zero cost."
         </p>
         <Input
           placeholder="Enter your name"
