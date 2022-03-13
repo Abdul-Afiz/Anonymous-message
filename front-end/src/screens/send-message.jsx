@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate } from "react-router";
 
 import Button from "../components/atoms/button";
 
-import { getMessage, newMsg } from "../reducers/messageReducer";
+import { newMsg } from "../reducers/messageReducer";
 
 const SendMessage = () => {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const SendMessage = () => {
         Send A Secret Message to {user.name.toUpperCase()}
       </h1>
       <p className="text-[#5b5675] font-normal text-[0.9rem] my-[1rem] text-center italic">
-        "Drop an anonymous message for {user.name.toUpperCase()}."
+        Drop an anonymous message for {user.name.toUpperCase()}.
       </p>
 
       <div
