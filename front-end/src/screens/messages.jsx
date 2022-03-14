@@ -9,7 +9,7 @@ import { getMessage } from "../reducers/messageReducer";
 
 const Messages = () => {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.message.messages);
+  const data = useSelector((state) => state.message);
 
   const navigate = useNavigate();
 
@@ -24,12 +24,19 @@ const Messages = () => {
   };
 
   return (
-    <div className="overflow-hidden flex flex-1">
+    <div className="overflow-hidden flex flex-1 ">
       <div className="flex flex-col p-4">
         <h2 className="text-4xl font-bold mt-2 text-center text-white">
           My Messages
         </h2>
-        {data.length !== 0 && (
+        {data.length === 0 ? (
+          <div className="bg-black m-4 p-4 rounded-md">
+            <h1 className="text-4xl text-white font-bold text-center ">
+              Ehyaaaa, you haven't gotten message, kindly share your link to
+              friends....
+            </h1>
+          </div>
+        ) : (
           <div className="bg-[white] m-4  py-1  px-4 scrollbar-thin scrollbar-thumb-indigo-400 rounded-md">
             {data.map((msg) => (
               <div

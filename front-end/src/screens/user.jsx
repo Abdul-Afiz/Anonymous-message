@@ -12,7 +12,6 @@ const User = () => {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.auth);
-  const msg = useSelector((state) => state.message);
 
   useEffect(() => {
     dispatch(reSignIn());
@@ -26,13 +25,13 @@ const User = () => {
 
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col w-full bg-white p-6 items-center rounded-sm">
+      <div className="flex flex-col bg-white p-6 items-center rounded-sm">
         <h1 className="text-4xl font-bold text-center">
-          {msg.name ? `${msg.name.toUpperCase()}'s Profile` : "Welcome"}
+          {user.name ? `${user.name.toUpperCase()}'s Profile` : "Welcome"}
         </h1>
         <p className="text-[#5b5675] font-normal text-[0.9rem] mt-[1rem] text-center max-w-[80%]">
-          {msg.name
-            ? `Welcome ${msg.name} Check Your Messages.`
+          {user.name
+            ? `Welcome ${user.name} Check Your Messages.`
             : "Welcome to Anonymous Message, share your link to start getting your messages"}
         </p>
 

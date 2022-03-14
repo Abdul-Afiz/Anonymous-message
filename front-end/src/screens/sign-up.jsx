@@ -19,8 +19,8 @@ const SignUp = () => {
     const user = { name, email, password };
 
     try {
-      const signup = await userServices.userSignup(user);
-      console.log(signup);
+      await userServices.userSignup(user);
+      navigate("/");
     } catch (error) {
       console.log(error.response.data.error);
     }

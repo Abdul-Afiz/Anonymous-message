@@ -37,13 +37,13 @@ userRouter.post("/login/", async (req, res) => {
     return res.status(401).json({ error: "invalid username or password" });
   }
 
-  const userToken = { id: user._id, email: user.email, name: user.name };
+  const userToken = { id: user._id, email: user.email };
 
   const token = jwt.sign(userToken, process.env.Secret, {
     expiresIn: "2 days",
   });
 
-  res.status(201).send({ id: user._id, token });
+  res.status(201).send({ id: user._id, name: user.name, token });
 });
 
 ////////////////////////////////
@@ -68,7 +68,8 @@ userRouter.get("/messages/", async (req, res) => {
     return res.status(401).json({ error: "invalid or missing token" });
   }
 
-  const msg = await User.findById(decodedToken.id);
+  const user = await User.findById(decodedToken.id);
+  const msg = user.messages;
   res.json(msg);
 });
 

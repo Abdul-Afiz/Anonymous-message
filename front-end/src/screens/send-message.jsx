@@ -11,15 +11,18 @@ const SendMessage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const id = useSelector((state) => state.auth.id);
-  const user = useSelector((state) => state.message);
+  const user = useSelector((state) => state.auth);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const message = e.target.message.value;
-    dispatch(newMsg(id, message));
-
-    e.target.message.value = "";
+    try {
+      const message = e.target.message.value;
+      dispatch(newMsg(user.id, message));
+      e.target.message.value = "";
+      navigate("/newuser");
+    } catch (error) {
+      console.log(error.response.data.error);
+    }
   };
 
   return (
@@ -35,26 +38,16 @@ const SendMessage = () => {
       </p>
 
       <div
-        className={`border-[1.8px] rounded-sm border-[#997fda] w-full py-[0.5rem] px-[0.7rem]`}
+        className={`border-[1.8px] rounded-sm border-[#997fda] w-full px-[0.7rem]`}
       >
         <textarea
-          className="w-full text-sm outline-none placeholder:text-[#61577995] my-[0.7rem]"
-          placeholder="placeholder"
+          className="w-full text-sm outline-none my-[0.5rem] text-black placeholder: italic text-[#61577995] "
+          placeholder="Type your message here"
           name="message"
         ></textarea>
       </div>
 
       <Button title="Send Message" cl="mt-[1.5rem]" type="submit" />
-
-      <p className="mt-[0.7rem] text-sm">
-        Don't have an account?{" "}
-        <span
-          className="text-[#280484] font-medium text-base cursor-pointer"
-          onClick={() => navigate("/signup")}
-        >
-          Sign Up
-        </span>
-      </p>
     </form>
   );
 };

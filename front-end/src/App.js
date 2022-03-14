@@ -10,10 +10,11 @@ import SignUp from "./screens/sign-up";
 import User from "./screens/user";
 import { reSignIn } from "./reducers/anonReducer";
 import { getMessage } from "./reducers/messageReducer";
+import AfterMessage from "./screens/after-message";
 
 function App() {
   const user = useSelector((state) => state.auth);
-  const msg = useSelector((state) => state.message.messages);
+  const msg = useSelector((state) => state.message);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -47,12 +48,24 @@ function App() {
         <Route
           path="/message/:id"
           element={
-            !user || !msg ? (
+            !user ? (
               <h1 className="font-semibold text-3xl text-white">
-                loading, please Reload
+                please Reload
               </h1>
             ) : (
               <SendMessage />
+            )
+          }
+        />
+        <Route
+          path="/newuser"
+          element={
+            !user ? (
+              <h1 className="font-semibold text-3xl text-white">
+                please Reload
+              </h1>
+            ) : (
+              <AfterMessage />
             )
           }
         />
